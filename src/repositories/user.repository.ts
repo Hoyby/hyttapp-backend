@@ -5,6 +5,7 @@ export interface IUserPayload {
   firstName: string;
   lastName: string;
   email: string;
+  premissionLevel: number;
 }
 
 export const getUsers = async (): Promise<Array<User>> => {
