@@ -34,7 +34,7 @@ export class Trip {
   tripStartDate!: Date;
 
   @Column({ nullable: true })
-  tripFinishDate!: Date;
+  tripEndDate!: Date;
 
   @ManyToMany((_type) => Equipment, equipment => equipment.trips)
   @JoinTable({

@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 import { Equipment, Trip } from "../models";
 
 export interface ITripPayload {
-  hostId: number;
+  hostID: number;
   name: string;
   location: string;
   tripStartDate: Date;
