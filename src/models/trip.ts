@@ -19,7 +19,7 @@ export class Trip {
   id!: number;
 
   @Column()
-  name!: string;
+  tripName!: string;
 
   @Column({ nullable: true })
   location!: string;

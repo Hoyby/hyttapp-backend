@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Post, Body, Path } from "tsoa";
+import { Get, Route, Tags, Post, Body, Path, Security } from "tsoa";
 import { User } from "../models";
 import {
   getUsers,
@@ -10,6 +10,7 @@ import {
 @Route("users")
 @Tags("User")
 export default class UserController {
+  @Security("jwt", ["user"])
   @Get("/")
   public async getUsers(): Promise<Array<User>> {
     return getUsers();

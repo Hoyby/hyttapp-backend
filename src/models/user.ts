@@ -18,17 +18,17 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  firstName!: string;
-
-  @Column()
-  lastName!: string;
-
-  @Column()
-  premissionLevel!: number;
-
-  @Column()
+  @Column({ unique: true })
   email!: string;
+
+  @Column({ nullable: false })
+  password!: string;
+
+  @Column({ nullable: false })
+  name!: string;
+
+  @Column({default: 0})
+  premissionLevel!: number;
 
   @OneToMany((_type) => Trip, (trip: Trip) => trip.user)
   trips!: Trip[];
