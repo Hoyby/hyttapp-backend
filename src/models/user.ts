@@ -27,7 +27,7 @@ export class User {
   @Column({ nullable: false })
   name!: string;
 
-  @Column({default: 0})
+  @Column({ default: 0 })
   premissionLevel!: number;
 
   @OneToMany((_type) => Trip, (trip: Trip) => trip.user)
@@ -45,11 +45,7 @@ export class User {
   })
   trip!: Trip[];
 
-  @ManyToOne(type => User, user => user.childUser)
-  parentUser!: User;
-
-  @OneToMany(type => User, user => user.parentUser)
-  childUser!: User[];
+  //TODO self reference
 
   @CreateDateColumn()
   createdAt!: Date;

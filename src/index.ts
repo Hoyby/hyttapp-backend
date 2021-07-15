@@ -6,7 +6,6 @@ import swaggerUi from "swagger-ui-express";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from "dotenv"
-
 import Router from "./routes";
 import dbConfig from "./config/database";
 import bodyParser from "body-parser";
@@ -46,3 +45,4 @@ createConnection(dbConfig)
     console.log("Unable to connect to db", err);
     process.exit(1);
   });
+

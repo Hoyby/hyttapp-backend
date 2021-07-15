@@ -15,7 +15,7 @@ export class Equipment {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column()
+    @Column({ unique: true })
     item!: string;
 
     //needed?

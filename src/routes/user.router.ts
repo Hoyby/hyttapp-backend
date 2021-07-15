@@ -7,6 +7,7 @@ import { authenticateToken } from "../middleware/authorization";
 const router = express.Router();
 
 // requres auth
+// FIXME
 router.get("/",authenticateToken, async (_req, res) => {
   const controller = new UserController();
   const response = await controller.getUsers();

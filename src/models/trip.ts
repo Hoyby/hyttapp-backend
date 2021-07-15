@@ -24,7 +24,7 @@ export class Trip {
   @Column({ nullable: true })
   location!: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   hostID!: number;
   @ManyToOne((_type) => User, (user: User) => user.trips)
   @JoinColumn()
