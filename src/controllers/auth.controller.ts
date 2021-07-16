@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Post, Body, Path, Security, Inject } from "tsoa";
+import { Get, Route, Tags, Post, Body, Path, Security, Inject, Delete } from "tsoa";
 import { User } from "../models";
 import { IAuthPayload } from "../repositories/auth.repository";
 import { jwtTokens } from '../utils/jwt-helpers';
@@ -16,5 +16,10 @@ export default class AuthController {
   @Get("/refresh_token")
   public async getRefreshToken(@Inject() user: IAuthPayload): Promise<{ accessToken: string, refreshToken: string }> {
     return jwtTokens(user!);
+  }
+
+  @Delete("/refresh_token")
+  public async deleteRefreshToken() {
+    return;
   }
 }

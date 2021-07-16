@@ -21,11 +21,9 @@ router.post("/", async (req, res) => {
         let tokens = await controller.getAccessToken(user!)
         res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true })
         res.json(tokens)
-
     } catch (error) {
         return res.status(401).json({ error: error.message })
     }
-
 });
 
 router.get('/refresh_token', (req, res) => {
@@ -42,10 +40,21 @@ router.get('/refresh_token', (req, res) => {
             res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true })
             res.json(tokens)
         })
-
     } catch (error) {
         return res.status(401).json({ error: error.message })
     }
 })
+
+router.delete('/refresh_token', (req, res) => {
+    try {
+        const controller = new AuthController();
+        controller.deleteRefreshToken() //FIXME
+        res.clearCookie('refresh_token')
+        return res.status(200).json({ message: 'refresh token deleted' })
+    } catch (error) {
+        res.status(401).json({ error: error.message })
+    }
+}
+)
 
 export default router;
