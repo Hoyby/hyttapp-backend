@@ -1,10 +1,15 @@
 import jwt from 'jsonwebtoken'
-import { IAuthPayload } from "../repositories/auth.repository";
+import { User } from '../models';
 
-function jwtTokens(user: IAuthPayload) {
+function jwtTokens(user: User) {
+
+    const payload = {
+        id: user.id,
+        username: user.name,
+    }
     // Check only ID, email and pass
-    const accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '2m' }) //15m
-    const refreshToken = jwt.sign({user}, process.env.REFRESH_TOKEN_SECRET!, { expiresIn: '14d' }) //14 days
+    const accessToken = jwt.sign({payload}, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '2m' }) //15m
+    const refreshToken = jwt.sign({payload}, process.env.REFRESH_TOKEN_SECRET!, { expiresIn: '14d' }) //14 days
     return ({ accessToken, refreshToken })
 }
 
