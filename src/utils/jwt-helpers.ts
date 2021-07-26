@@ -8,8 +8,8 @@ function jwtTokens(user: User) {
         username: user.name,
     }
     // Check only ID, email and pass
-    const accessToken = jwt.sign({payload}, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '2m' }) //15m
-    const refreshToken = jwt.sign({payload}, process.env.REFRESH_TOKEN_SECRET!, { expiresIn: '14d' }) //14 days
+    const accessToken = jwt.sign({payload}, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '30s' }) //15m
+    const refreshToken = jwt.sign({payload}, process.env.REFRESH_TOKEN_SECRET!, { expiresIn: '1m' }) //14 days
     return ({ accessToken, refreshToken })
 }
 

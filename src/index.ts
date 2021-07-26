@@ -12,9 +12,16 @@ import bodyParser from "body-parser";
 
 dotenv.config()
 
-const PORT = process.env.PORT || 8000
+const PORT: number = parseInt(process.env.PORT!) || 8000
+const IP: string = process.env.IP || 'localhost'
+
 const app: Application = express();
-const corsOption = { credentials: true, orgin: process.env.URL || '*' }
+const corsOption = {
+  credentials: true,
+  origin: 'http://127.0.0.1:3000',
+  allowedHeaders: ['Origin', 'X-Requested-With', 'contentType', 'Content-Type', 'Accept', 'Authorization'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE']
+}
 
 app.use(express.json());
 app.use(cors(corsOption))
@@ -38,11 +45,10 @@ app.use(Router);
 createConnection(dbConfig)
   .then((_connection) => {
     app.listen(PORT, () => {
-      console.log("Server is running on port", PORT);
+      console.log("Server is running on ip:", IP, ", port:", PORT);
     });
   })
   .catch((err) => {
     console.log("Unable to connect to db", err);
     process.exit(1);
   });
-

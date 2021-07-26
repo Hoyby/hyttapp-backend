@@ -7,7 +7,7 @@ import AuthController from "../controllers/auth.controller";
 const router = express.Router();
 
 
-router.post("/", async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await getUser(email)
@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
         //JWT
         const controller = new AuthController();
         let tokens = await controller.getAccessToken(user!)
-        res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true })
+        res.cookie('refresh_token', tokens.refreshToken, { maxAge: 86400000, httpOnly: false, sameSite: 'none', secure: true})
         res.json(tokens)
     } catch (error) {
         return res.status(401).json({ error: error.message })
@@ -37,7 +37,7 @@ router.get('/refresh_token', (req, res) => {
             if (error) return res.status(403).json({ error: error.message })
             const controller = new AuthController();
             let tokens = await controller.getRefreshToken(user!)
-            res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true })
+            res.cookie('refresh_token', tokens.refreshToken, { maxAge: 86400000, httpOnly: false, sameSite: 'none', secure: true})
             res.json(tokens)
         })
     } catch (error) {
@@ -49,7 +49,7 @@ router.delete('/refresh_token', (req, res) => {
     try {
         const controller = new AuthController();
         controller.deleteRefreshToken() //FIXME
-        res.clearCookie('refresh_token')
+        res.clearCookie('refresh_token', { maxAge: 86400000, httpOnly: false, sameSite: 'none', secure: true})
         return res.status(200).json({ message: 'refresh token deleted' })
     } catch (error) {
         res.status(401).json({ error: error.message })
