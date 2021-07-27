@@ -5,30 +5,29 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToMany,
-} from "typeorm";
-import { Trip } from "./trip";
-import { User } from "./user";
+} from 'typeorm'
+import { Trip } from './trip'
+import { User } from './user'
 
 @Entity()
 export class Equipment {
-
     @PrimaryGeneratedColumn()
-    id!: number;
+    id!: number
 
     @Column({ unique: true })
-    item!: string;
+    item!: string
 
     //needed?
-    @ManyToMany((_type) => User, user => user.equipment)
-    users!: User[];
+    @ManyToMany((_type) => User, (user) => user.equipment)
+    users!: User[]
 
     //needed?
-    @ManyToMany((_type) => Trip, trip => trip.equipment)
-    trips!: Trip[];
+    @ManyToMany((_type) => Trip, (trip) => trip.equipment)
+    trips!: Trip[]
 
     @CreateDateColumn()
-    createdAt!: Date;
+    createdAt!: Date
 
     @UpdateDateColumn()
-    updatedAt!: Date;
+    updatedAt!: Date
 }
