@@ -1,56 +1,56 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    ManyToOne,
-    DeleteDateColumn,
-    CreateDateColumn,
-    UpdateDateColumn,
-    JoinColumn,
-    ManyToMany,
-    JoinTable,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  DeleteDateColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm'
 import { Equipment } from './equipment'
 import { User } from './user'
 
 @Entity()
 export class Trip {
-    @PrimaryGeneratedColumn()
-    id!: number
+  @PrimaryGeneratedColumn()
+  id!: number
 
-    @Column()
-    tripName!: string
+  @Column()
+  tripName!: string
 
-    @Column({ nullable: true })
-    location!: string
+  @Column({ nullable: true })
+  location!: string
 
-    @Column({ nullable: false })
-    hostID!: number
-    @ManyToOne((_type) => User, (user: User) => user.trips)
-    @JoinColumn()
-    user!: User
+  @Column({ nullable: false })
+  hostID!: number
+  @ManyToOne((_type) => User, (user: User) => user.trips)
+  @JoinColumn()
+  user!: User
 
-    @Column({ nullable: true })
-    tripStartDate!: Date
+  @Column({ nullable: true })
+  tripStartDate!: Date
 
-    @Column({ nullable: true })
-    tripEndDate!: Date
+  @Column({ nullable: true })
+  tripEndDate!: Date
 
-    @ManyToMany((_type) => Equipment, (equipment) => equipment.trips)
-    @JoinTable({
-        name: 'tripEquipment',
-    })
-    equipment!: Equipment[]
+  @ManyToMany((_type) => Equipment, (equipment) => equipment.trips)
+  @JoinTable({
+    name: 'tripEquipment',
+  })
+  equipment!: Equipment[]
 
-    @ManyToMany((_type) => User, (user) => user.trip)
-    users!: User[]
+  @ManyToMany((_type) => User, (user) => user.trip)
+  users!: User[]
 
-    @CreateDateColumn()
-    createdAt!: Date
+  @CreateDateColumn()
+  createdAt!: Date
 
-    @DeleteDateColumn()
-    deletedAt!: Date
+  @DeleteDateColumn()
+  deletedAt!: Date
 
-    @UpdateDateColumn()
-    updatedAt!: Date
+  @UpdateDateColumn()
+  updatedAt!: Date
 }
