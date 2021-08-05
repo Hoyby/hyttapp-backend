@@ -51,7 +51,7 @@ app.use(Router)
 
 createConnection(dbConfig)
   .then((_connection) => {
-    app.listen(PORT, IP, () => {
+    app.listen(PORT, () => {
       console.log('Server is running on ip:', IP, ', port:', PORT)
     })
   })
